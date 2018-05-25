@@ -88,10 +88,10 @@ namespace math{
             }
             
             //TODO    
-            int_type truncate()
-            {   n_ -= n_ % d_;
-                make_coprime();
-                return (int_type) n_ / d_;
+            int_type truncate() const
+            {   
+                
+                return (int_type) (n_ - (n_ % d_)) / d_;
             }
 
             bool is_integer() const

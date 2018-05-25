@@ -87,7 +87,6 @@ int main()
     rational<int> tr3(-2,4);
     cout << "Rational!" << endl;
     int number3 = tr3.truncate();
-    assert(tr3.numerator() == 0 && tr3.denominator() == 1);
     assert(number3 == 0);
 
     //is_int
