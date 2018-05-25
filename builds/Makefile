@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named test_rational
+
+# Build rule for target.
+test_rational: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_rational
+.PHONY : test_rational
+
+# fast build rule for target.
+test_rational/fast:
+	$(MAKE) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/build
+.PHONY : test_rational/fast
+
+#=============================================================================
 # Target rules for targets named test_random
 
 # Build rule for target.
@@ -150,6 +163,33 @@ app/test_random.cpp.s:
 	$(MAKE) -f CMakeFiles/test_random.dir/build.make CMakeFiles/test_random.dir/app/test_random.cpp.s
 .PHONY : app/test_random.cpp.s
 
+app/test_rational.o: app/test_rational.cpp.o
+
+.PHONY : app/test_rational.o
+
+# target to build an object file
+app/test_rational.cpp.o:
+	$(MAKE) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/app/test_rational.cpp.o
+.PHONY : app/test_rational.cpp.o
+
+app/test_rational.i: app/test_rational.cpp.i
+
+.PHONY : app/test_rational.i
+
+# target to preprocess a source file
+app/test_rational.cpp.i:
+	$(MAKE) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/app/test_rational.cpp.i
+.PHONY : app/test_rational.cpp.i
+
+app/test_rational.s: app/test_rational.cpp.s
+
+.PHONY : app/test_rational.s
+
+# target to generate assembly for a file
+app/test_rational.cpp.s:
+	$(MAKE) -f CMakeFiles/test_rational.dir/build.make CMakeFiles/test_rational.dir/app/test_rational.cpp.s
+.PHONY : app/test_rational.cpp.s
+
 lib/random.o: lib/random.cpp.o
 
 .PHONY : lib/random.o
@@ -185,10 +225,14 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... test_rational"
 	@echo "... test_random"
 	@echo "... app/test_random.o"
 	@echo "... app/test_random.i"
 	@echo "... app/test_random.s"
+	@echo "... app/test_rational.o"
+	@echo "... app/test_rational.i"
+	@echo "... app/test_rational.s"
 	@echo "... lib/random.o"
 	@echo "... lib/random.i"
 	@echo "... lib/random.s"

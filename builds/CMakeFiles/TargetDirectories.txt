@@ -1,3 +1,4 @@
 /home/tania05/SENG475/basics-tania05/builds/CMakeFiles/rebuild_cache.dir
 /home/tania05/SENG475/basics-tania05/builds/CMakeFiles/edit_cache.dir
+/home/tania05/SENG475/basics-tania05/builds/CMakeFiles/test_rational.dir
 /home/tania05/SENG475/basics-tania05/builds/CMakeFiles/test_random.dir
