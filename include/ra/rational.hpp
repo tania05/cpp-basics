@@ -206,7 +206,7 @@ namespace math{
     //TODO
     //binary plus
     template<typename T>
-    rational<T> operator+(rational<T>& a, rational<T>& b)
+    rational<T> operator+(const rational<T>& a, const rational<T>& b)
     {   
         rational<T> tmp(a);
         tmp.operator+=(b);
@@ -215,7 +215,7 @@ namespace math{
 
     //binary minus
     template<typename T>
-    rational<T> operator-(rational<T>&a, rational<T>& b)
+    rational<T> operator-(const rational<T>&a, const rational<T>& b)
     {
         rational<T> tmp(a);
         tmp.operator-=(b);
@@ -224,7 +224,7 @@ namespace math{
 
     //binary multiply
     template<typename T>
-    rational<T> operator*(rational<T>&a, rational<T>& b)
+    rational<T> operator*(const rational<T>&a, const rational<T>& b)
     {
         rational<T> tmp(a);
         tmp.operator*=(b);
@@ -233,7 +233,7 @@ namespace math{
     
     //binary divide
     template<typename T>
-    rational<T> operator/(rational<T>&a, rational<T>& b)
+    rational<T> operator/(const rational<T>&a, const rational<T>& b)
     {
         rational<T> tmp(a);
         tmp.operator/=(b);
