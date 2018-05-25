@@ -24,7 +24,7 @@ namespace math{
             rational(rational&&) = default;
             rational& operator=(rational&&) = default;
 
-            rational(rational&) = default;
+            rational(const rational&) = default;
             rational& operator=(rational&) = default;
             
             ~rational() = default;
@@ -139,10 +139,6 @@ namespace math{
             rational& operator++()
             {
                n_ = n_ + d_;
-               using namespace std;
-               cout << "NNNN" << endl;
-               cout << n_ << endl;
-
                make_coprime(); 
                return *this;
             } 
@@ -212,56 +208,56 @@ namespace math{
     template<typename T>
     rational<T> operator+(rational<T>& a, rational<T>& b)
     {   
-        /* using namespace std;
-        cout<< "YOU HERE !!!!!!!!!!!!!!!!!!!"<< endl;
         rational<T> tmp(a);
         tmp+=b;
-        return tmp; */
-        return rational<T>();
+        return tmp;
     }
 
     //binary minus
     template<typename T>
     rational<T> operator-(rational<T>&a, rational<T>& b)
     {
-        return rational<T>();
+        rational<T> tmp(a);
+        tmp-=b;
+        return tmp;
     }
 
     //binary multiply
     template<typename T>
     rational<T> operator*(rational<T>&a, rational<T>& b)
     {
-        return rational<T>();
+        rational<T> tmp(a);
+        tmp*=b;
+        return tmp;
     }
     
     //binary divide
     template<typename T>
     rational<T> operator/(rational<T>&a, rational<T>& b)
     {
-        return rational<T>();
+        rational<T> tmp(a);
+        tmp/=b;
+        return tmp;
     }
    
-    //unary minus 
+    //unary plus 
+    template<typename T>
+    rational<T> operator+(const rational<T>&a)
+    {
+        return rational<T>(a);
+    }
+
+    //unary minus
     template<typename T>
     rational<T> operator-(const rational<T>&a)
     {
-        return rational<T>();
-    }
-
-    //unary plus
-     template<typename T>
-    rational<T> operator+(const rational<T>&a)
-    {
-        return rational<T>();
+        rational<T> tmp(a.numerator()*-1, a.denominator());
+        return tmp;
     }
 
     template<typename T>
     std::ostream& operator<<(std::ostream& os, rational<T>& r)
     {
-        if(r.numerator() < 0)
-        {
-            os << "-";
-        }
         os << r.numerator() << "/" << r.denominator();
         return os;
     }
@@ -277,8 +273,7 @@ namespace math{
        }
        else
        {
-           //to be used for checking if we need to make things negative
-           sign = '+';
+           is.setstate(std::ios_base::failbit);
        }
 
        is >> r.numerator();
@@ -292,11 +287,6 @@ namespace math{
            is >> r.denominator();
        }
 
-       if(sign == '-')
-       {
-           //TODO
-           //Make thins negative
-       }
        return is;
 
     }

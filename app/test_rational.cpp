@@ -131,10 +131,38 @@ int main()
     //binary plus
     rational<int> badd1(4,6);
     rational<int> badd2(1,2);
-    rational<int> badd3 = badd1 + badd2;
+    rational<int> badd3(std::move(badd1 + badd2));
+
     assert(badd1.numerator() == 2 && badd1.denominator() == 3);
     assert(badd2.numerator() == 1 && badd2.denominator() == 2);
     assert(badd3.numerator() == 7 && badd3.denominator() == 6);
 
+    rational<int> bmul(move(badd1*badd2));
+    assert(badd1.numerator() == 2 && badd1.denominator() == 3);
+    assert(badd2.numerator() == 1 && badd2.denominator() == 2);
+    assert(bmul.numerator() == 1 && bmul.denominator() == 3);
+
+    rational<int> bmin(move(badd2-badd1));
+    assert(badd1.numerator() == 2 && badd1.denominator() == 3);
+    assert(badd2.numerator() == 1 && badd2.denominator() == 2);
+    assert(bmin.numerator() == -1 && bmin.denominator() == 6);
+
+    rational<int> bdiv(move(badd1 / badd2));
+    assert(badd1.numerator() == 2 && badd1.denominator() == 3);
+    assert(badd2.numerator() == 1 && badd2.denominator() == 2);
+    assert(bdiv.numerator() == 4 && bdiv.denominator() == 3);
+
+    //unaries
+    rational<int> uadd(4,-3);
+    rational<int> uadd2(move(+uadd));
+    assert(uadd2.numerator() == -4 && uadd2.denominator() == 3);
+    cout << uadd2 << endl;
+
+    rational<int> umin(move(-uadd));
+    assert(umin.numerator() == 4 && uadd2.denominator() == 3);
+    cout << umin << endl ; 
+
+    rational<int> is;
+    cin >> is;
     return 0;
 }
