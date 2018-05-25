@@ -11,7 +11,7 @@ namespace math{
     {
         public:
             using int_type = T;
-            rational() : n_(0), d_(0) {}
+            rational() : n_(0), d_(1) {}
             rational(int_type n, int_type d = 1) :  n_(n), d_(d)
             {
                 if(d == 0)
@@ -87,6 +87,7 @@ namespace math{
                 return *this;
             }
             
+
             //TODO    
             int_type truncate() const
             {   
@@ -118,6 +119,7 @@ namespace math{
             bool operator<(const rational& other) const
             {
                 return is_less(other);
+
             }
 
             bool operator>(const rational& other) const
@@ -191,6 +193,7 @@ namespace math{
                using namespace std;
                int_type gcd_ = (int_type) __gcd(n_,d_);
                n_ = n_/abs(gcd_);
+
                d_ = d_/abs(gcd_);
             } 
             void check_negative_denominator()
@@ -265,28 +268,28 @@ namespace math{
     template<typename T>
     std::istream& operator>>(std::istream& is, rational<T>& r)
     {
-       char sign;
+       T n = 0;
+       T d = 1;
        char slash;
-       if(is.peek() == '-' || is.peek() == '+')
-       {
-           is >> sign;
-       }
-       else
-       {
-           is.setstate(std::ios_base::failbit);
-       }
-
-       is >> r.numerator();
+  
+       is >> n;
+       
        is >> slash;
        if(slash != '/')
        {
            is.setstate(std::ios_base::failbit);
        }
+       
        else
        {
-           is >> r.denominator();
+           is >> d;
+           if(d < 0)
+           {
+           	  is.setstate(std::ios_base::failbit);
+           }
        }
-
+		r = rational<T>(n,d);	
+		
        return is;
 
     }
