@@ -103,7 +103,6 @@ int main()
     assert(!zero1 == false && !zero2 == false && !zero3);
     assert(zero3.numerator() == 0 && zero3.denominator() == 1);
     cout<<"All tests passes!"<< endl;
-    return 0;
 
     //==
     rational<int> eq1(3,4);
@@ -128,4 +127,14 @@ int main()
     assert(add.numerator() == 5 && add.denominator() == 3);
     ++add;
     assert(add.numerator() == 8 && add.denominator() == 3);
+
+    //binary plus
+    rational<int> badd1(4,6);
+    rational<int> badd2(1,2);
+    rational<int> badd3 = badd1 + badd2;
+    assert(badd1.numerator() == 2 && badd1.denominator() == 3);
+    assert(badd2.numerator() == 1 && badd2.denominator() == 2);
+    assert(badd3.numerator() == 7 && badd3.denominator() == 6);
+
+    return 0;
 }

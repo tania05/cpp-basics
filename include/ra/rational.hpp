@@ -107,41 +107,47 @@ namespace math{
 
             bool operator==(const rational& other) const 
             {
-                return n_/d_ == other.n_ / other.d_;
+                return is_equals(other);
             }
 
             bool operator!=(const rational& other) const 
             {
-                return n_/d_ != other.n_ / other.d_;
+                return n_ != other.n_ || d_ != other.d_;
             }
             
             bool operator<(const rational& other) const
             {
-                return n_/d_ < other.n_ / other.d_;
+                return is_less(other);
             }
 
             bool operator>(const rational& other) const
             {
-                return n_/d_ > other.n_ / other.d_;
+                return is_more(other);
             }
             
             bool operator<=(const rational& other) const
             {
-                return n_/d_ < other.n_/other.d_ || n_/d_ == other.n_/other.d_;
+                return is_less(other) || is_equals(other);
             }
             
             bool operator>=(const rational& other) const
             {
-                return n_/d_ > other.n_/other.d_ || n_/d_ == other.n_/other.d_;
+                return is_equals(other) || is_more(other);
             }
             
              //prefix
             rational& operator++()
             {
-               n_ = n_*d_;
+               n_ = n_ + d_;
+               using namespace std;
+               cout << "NNNN" << endl;
+               cout << n_ << endl;
+
                make_coprime(); 
                return *this;
             } 
+            
+            
 
             rational operator++(int)
             {
@@ -168,6 +174,21 @@ namespace math{
         private:
             int_type n_;
             int_type d_;
+            bool is_equals(const rational& other) const 
+            {
+                return n_ == other.n_ && d_ == other.d_;
+            }
+
+            bool is_less(const rational& other) const
+            {
+                return n_*other.d_ < other.n_*d_;
+            }
+
+            bool is_more(const rational& other) const
+            {
+                return n_*other.d_ > other.n_*d_;
+            }
+
             void make_coprime()
             {
                check_negative_denominator();
@@ -190,9 +211,13 @@ namespace math{
     //binary plus
     template<typename T>
     rational<T> operator+(rational<T>& a, rational<T>& b)
-    {   rational<T> tmp;
-        tmp = a+b;
-        return tmp;
+    {   
+        /* using namespace std;
+        cout<< "YOU HERE !!!!!!!!!!!!!!!!!!!"<< endl;
+        rational<T> tmp(a);
+        tmp+=b;
+        return tmp; */
+        return rational<T>();
     }
 
     //binary minus
