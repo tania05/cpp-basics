@@ -138,8 +138,9 @@ namespace math{
              //prefix
             rational& operator++()
             {
-                n_ = n_+d_;
-                return *this;
+               n_ = n_*d_;
+               make_coprime(); 
+               return *this;
             } 
 
             rational operator++(int)
@@ -153,6 +154,7 @@ namespace math{
             rational& operator--()
             {
                 n_ = n_-d_;
+                make_coprime();
                 return *this;
             } 
 

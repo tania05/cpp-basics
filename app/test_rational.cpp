@@ -121,4 +121,11 @@ int main()
 
     assert(eq4 <= eq2);
     assert(eq3 >= eq2 && eq3 >= eq4);
+
+    //prefix add
+    rational<int> add(4,6);
+    add++;
+    assert(add.numerator() == 5 && add.denominator() == 3);
+    ++add;
+    assert(add.numerator() == 8 && add.denominator() == 3);
 }
