@@ -256,7 +256,7 @@ namespace math{
     }
 
     template<typename T>
-    std::ostream& operator<<(std::ostream& os, rational<T>& r)
+    std::ostream& operator<<(std::ostream& os, const rational<T>& r)
     {
         os << r.numerator() << "/" << r.denominator();
         return os;
