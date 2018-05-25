@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
 project(cpp_basics LANGUAGES CXX)
 
-include(Sanitizers.cmake)
 add_executable(test_random app/test_random.cpp lib/random.cpp include/ra/random.hpp)
 add_executable(test_rational app/test_rational.cpp include/ra/rational.hpp)
 
