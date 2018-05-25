@@ -3,10 +3,11 @@
 #include <iostream>
 
 class linear_congruential_generator { 
+    public:
 		linear_congruential_generator(int_type multiplier, int_type increment, int_type modulus, int_type seed = default_seed());
-		linear_congruential_generator(linear_congruential_generator&&) = default;
-		linear_contruential_generator(linear_congruential_generator&) = default;
-		~linear_congruential_generator() = default;
+		linear_congruential_generator(linear_congruential_generator&&);
+		linear_contruential_generator(linear_congruential_generator&);
+		~linear_congruential_generator();
 		
 		//Returns the multiplier value a 
 		int_type multiplier();
@@ -19,7 +20,9 @@ class linear_congruential_generator {
 		
 		//Returns the default seed value x0
 		static int_type default_seed();
-		
+        
+        int_type seed(int_type new_seed);        
+
 		//Advances the generator to the next position
 		int_type operator()();
 		
@@ -39,6 +42,10 @@ class linear_congruential_generator {
 		bool operator!=(const linear_congruential_generator& other);
 		
 		ostream& operator<<(ostream& os, const linear_congruential_generator& generator)
-			
-}
 
+    private:
+        int_type multiplier;
+        int_type increment;
+        int_type modulus;
+        int_type x0;
+}
