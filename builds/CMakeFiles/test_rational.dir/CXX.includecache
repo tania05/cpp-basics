@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tania05/SENG475/basics-tania05/app/test_rational.cpp
+include/ra/rational.hpp
+/home/tania05/SENG475/basics-tania05/app/include/ra/rational.hpp
+

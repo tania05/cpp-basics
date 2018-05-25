@@ -1,67 +1,105 @@
 #include <iostream>
-#include "include/ra/random.hpp"
+#include "ra/random.hpp"
 
-		
-    linear_contruential_generator::linear_congruential_generator(int_type multiplier, int_type increment, int_type modulus, int_type seed = default_seed())
+namespace ra{
+namespace random {
+
+    linear_congruential_generator::linear_congruential_generator(linear_congruential_generator::int_type multiplier, linear_congruential_generator::int_type increment,  linear_congruential_generator::int_type modulus, linear_congruential_generator::int_type seed) :
+        multiplier_(multiplier),
+        increment_(increment),
+        modulus_(modulus),
+        x0_(seed),
+        xi_(seed),
+        prev_(seed)
     {
-        this.multiplier = multiplier;
-        this.increment = increment;
-        this.modulus = modulus;
-        this.x0 = seed;
-    };
-		
-    linear_contruential_generator::linear_congruential_generator(linear_congruential_generator&&) = default;
-		
-    linear_congruential_generator::linear_contruential_generator(linear_congruential_generator&) = default;
-		
-    linear_congruential_generator::~linear_congruential_generator() = default;
-		
+        
+    }
+
+    /* linear_congruential_generator::linear_congruential_generator(linear_congruential_generator& other) 
+    {
+        multiplier_ = other.multiplier_;
+        increment_ = other.increment_;
+        modulus_ = other.modulus_;
+        x0_ = other.x0_;
+        xi_ = other.xi_;
+        prev_ = other.prev_;
+    }*/
 		//Returns the multiplier value a 
-    int_type linear_congruential_generator::multiplier()
+    linear_congruential_generator::int_type linear_congruential_generator::multiplier() const 
     {
-        return multiplier;
-    };
+        return multiplier_;
+    }
 		
 		//returns the increment value c
-    int_type linear_contruential_generator::increment()
+    linear_congruential_generator::int_type linear_congruential_generator::increment() const 
     {
-        return increment;
-    };
+        return increment_;
+    }
 		
 		//returne the modulus value m
-    int_type linear_congruential_generator::modulus()
+    linear_congruential_generator::int_type linear_congruential_generator::modulus() const 
     {
-        return modulus;
-    };
+        return modulus_;
+    }
 		
-    void linear_congruential_generator::seed(int_type new_seed)
+    void linear_congruential_generator::seed(linear_congruential_generator::int_type new_seed)
     {
-        this.x0 = new_seed
+        x0_ = new_seed;
+        xi_ = x0_;
+        prev_ = x0_;
     }
 		//Returns the default seed value x0
-    static int_type linear_contruential_generator::default_seed()
+    linear_congruential_generator::int_type linear_congruential_generator::default_seed()
     {
         return 1;
-    };
+    }
 		
         //Advances the generator to the next position
-    int_type linear_contruential_generator::operator()();
+    linear_congruential_generator::int_type linear_congruential_generator::operator()()
+    {
+        prev_ = xi_;
+        xi_ = (multiplier_*prev_ + increment_) % modulus_;
+        return xi_;
+    }
 		
 		//Discards the next n numbers in the generated sequence
-    void linear_congruential_generator::discard(unsigned long long n);
+    void linear_congruential_generator::discard(unsigned long long n)
+    {
+        for(unsigned long long i=0; i< n; i++)
+        {
+           (*this)();
+        }
+    }
 		
 		//Returns the potential smallest value
-    int_type linear_contruential_generator::min();
+    linear_congruential_generator::int_type linear_congruential_generator::min() const
+    {
+        return increment_ == 0 ? 1 : 0;
+    }
 		
 		//Returns the potential largest value
-    int_type linear_contruential_generator::max();
+    linear_congruential_generator::int_type linear_congruential_generator::max() const
+    {
+        return modulus_ - 1;
+    }
 		
 		//Equality
-    bool linear_contruential_generator::operator==(const linear_congruential_generator& other);
+    bool linear_congruential_generator::operator==(const linear_congruential_generator& other) const
+    {
+        return xi_ == other.xi_ && increment_ == other.increment_ && multiplier_ == other.multiplier_ && modulus_ == other.modulus_;
+    }
 		
 		//Inequality
-    bool linear_contruential_generator::operator!=(const linear_congruential_generator& other);
+    bool linear_congruential_generator::operator!=(const linear_congruential_generator& other) const
+    {
+        return xi_ != other.xi_ || increment_ != other.increment_  || modulus_ != other.modulus_ || multiplier_ != other.multiplier_;
+    }
 		
-    ostream& linear_contruential_generator::operator<<(ostream& os, const linear_congruential_generator& generator)
-			
+    std::ostream& operator<<(std::ostream& os, const linear_congruential_generator& other) 
+    {
+        os << other.multiplier_ << ' ' << other.increment_ << ' ' << other.modulus_ << ' ' << other.xi_;
+        return os;
+    }
 
+}
+}

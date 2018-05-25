@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/ra/random.hpp
+iostream
+-
+
+/home/tania05/SENG475/basics-tania05/app/test_random.cpp
+iostream
+-
+ra/random.hpp
+/home/tania05/SENG475/basics-tania05/app/ra/random.hpp
+cassert
+-
+
+/home/tania05/SENG475/basics-tania05/lib/random.cpp
+iostream
+-
+ra/random.hpp
+/home/tania05/SENG475/basics-tania05/lib/ra/random.hpp
+
