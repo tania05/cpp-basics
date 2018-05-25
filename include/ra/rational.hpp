@@ -1,6 +1,7 @@
 #include <iostream>
-#include <numeric>
 #include <limits>
+#include <algorithm>
+#include <cmath>
 
 namespace ra{
 namespace math{
@@ -18,6 +19,7 @@ namespace math{
                     n_ = std::numeric_limits<int_type>::max();
                     d_ = int_type(1); 
                 }
+                make_coprime();
             }
             rational(rational&&) = default;
             rational& operator=(rational&&) = default;
@@ -52,25 +54,37 @@ namespace math{
             //TODO
             rational& operator+=(const rational& other)
             {
+                n_ = n_*other.d_ + other.n_*d_ ;
+                d_ *= other.d_;
+                make_coprime();
                 return *this;
             }
 
             //TODO
             rational& operator-=(const rational& other)
             {
+                n_ = n_*other.d_ - other.n_*d_ ;
+                d_ *= other.d_;
+                make_coprime();
                 return *this;
             }
 
             //TODO
             rational& operator*=(const rational& other)
             {   
+                n_ *= other.n_; 
+                d_ *= other.d_;
+                make_coprime();
                 return *this;
             }
 
             //TODO
             rational& operator/=(const rational& other)
             {
-               return *this;
+                n_ *= other.d_; 
+                d_ *= other.n_;
+                make_coprime();
+                return *this;
             }
             
             //TODO    
@@ -153,10 +167,11 @@ namespace math{
             int_type d_;
             void make_coprime()
             {
-                using namespace std;
+               check_negative_denominator();
+               using namespace std;
                int_type gcd_ = (int_type) __gcd(n_,d_);
-               n_ = n_/gcd_;
-               d_ = d_/gcd_;
+               n_ = n_/abs(gcd_);
+               d_ = d_/abs(gcd_);
             } 
             void check_negative_denominator()
             {
