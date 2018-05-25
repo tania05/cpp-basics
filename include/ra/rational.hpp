@@ -88,9 +88,10 @@ namespace math{
             }
             
             //TODO    
-            int_type truncate() const
-            {
-                return 0;
+            int_type truncate()
+            {   n_ -= n_ % d_;
+                make_coprime();
+                return (int_type) n_ / d_;
             }
 
             bool is_integer() const
@@ -100,7 +101,7 @@ namespace math{
             
             bool operator!() const
             {
-                return n_ = 0;
+                return n_ == 0;
             }
 
 
@@ -126,12 +127,12 @@ namespace math{
             
             bool operator<=(const rational& other) const
             {
-                return n_/d_ < other._n/other.d_ || n_/d_ == other.n_/other.d_;
+                return n_/d_ < other.n_/other.d_ || n_/d_ == other.n_/other.d_;
             }
             
             bool operator>=(const rational& other) const
             {
-                return n_/d_ < other.n_/other.d_ || n_/d_ == other.n_/other.d_;
+                return n_/d_ > other.n_/other.d_ || n_/d_ == other.n_/other.d_;
             }
             
              //prefix
@@ -182,6 +183,7 @@ namespace math{
                 }
             }
     };
+
     //TODO
     //binary plus
     template<typename T>

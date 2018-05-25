@@ -72,7 +72,53 @@ int main()
     d1 /= d2;
     assert(d1.numerator() == -2 && d1.denominator() == 1);
        
+    
+    // truncate
+    rational<int> tr1(-2296,113);
+    int number = tr1.truncate();
+    assert(number == -20);
 
+    //truncate
+    rational<int> tr2(-2296,41);
+    int number2 = tr2.truncate();
+    assert(number2 == -56);
+    
+    //truncate
+    rational<int> tr3(-2,4);
+    cout << "Rational!" << endl;
+    int number3 = tr3.truncate();
+    assert(tr3.numerator() == 0 && tr3.denominator() == 1);
+    assert(number3 == 0);
+
+    //is_int
+    rational<int> isint1(3,4);
+    rational<int> isint2(2,-2);
+    rational<int> isint3(10,5);
+    assert(!isint1.is_integer() && isint2.is_integer() && isint3.is_integer());
+
+    //!
+    rational<int> zero1(3,4);
+    rational<int> zero2(2,-2);
+    rational<int> zero3(0,5);
+    assert(!zero1 == false && !zero2 == false && !zero3);
+    assert(zero3.numerator() == 0 && zero3.denominator() == 1);
     cout<<"All tests passes!"<< endl;
     return 0;
+
+    //==
+    rational<int> eq1(3,4);
+    rational<int> eq2(6,8);
+    rational<int> eq3(10,5);
+    rational<int> eq4(5,10);
+
+    assert(eq1==eq2);
+    assert(!(eq1 == eq3) && !(eq1 == eq4));
+    
+    assert(eq1 != eq3 && eq1 != eq4);
+    
+    assert(eq4 < eq2);
+    assert(eq3 > eq2 && eq3 > eq4);
+
+    assert(eq4 <= eq2);
+    assert(eq3 >= eq2 && eq3 >= eq4);
 }
