@@ -14,7 +14,7 @@ int main()
     //test for default constructor
     rational<int> t1;
     assert(t1.numerator() == 0 && t1.denominator() == 0);
-    
+   /*   
     cout<<"passes default constructor!"<< endl;
     //test for two value constructor
     rational<int> t2(1,3);
@@ -163,6 +163,6 @@ int main()
     cout << umin << endl ; 
 
     rational<int> is;
-    cin >> is;
+    cin >> is; */
     return 0;
 }
