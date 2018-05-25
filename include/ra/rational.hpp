@@ -209,7 +209,7 @@ namespace math{
     rational<T> operator+(rational<T>& a, rational<T>& b)
     {   
         rational<T> tmp(a);
-        tmp+=b;
+        tmp.operator+=(b);
         return tmp;
     }
 
@@ -218,7 +218,7 @@ namespace math{
     rational<T> operator-(rational<T>&a, rational<T>& b)
     {
         rational<T> tmp(a);
-        tmp-=b;
+        tmp.operator-=(b);
         return tmp;
     }
 
@@ -227,7 +227,7 @@ namespace math{
     rational<T> operator*(rational<T>&a, rational<T>& b)
     {
         rational<T> tmp(a);
-        tmp*=b;
+        tmp.operator*=(b);
         return tmp;
     }
     
@@ -236,7 +236,7 @@ namespace math{
     rational<T> operator/(rational<T>&a, rational<T>& b)
     {
         rational<T> tmp(a);
-        tmp/=b;
+        tmp.operator/=(b);
         return tmp;
     }
    
